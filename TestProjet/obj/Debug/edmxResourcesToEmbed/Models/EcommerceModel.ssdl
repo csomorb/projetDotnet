@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom_categorie" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="image" Type="nchar" MaxLength="200" />
+    <Property Name="description" Type="ntext" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nchar" MaxLength="40" Nullable="false" />
+    <Property Name="prenom" Type="nchar" MaxLength="40" Nullable="false" />
+    <Property Name="email" Type="nchar" MaxLength="40" Nullable="false" />
+    <Property Name="genre" Type="nchar" MaxLength="3" Nullable="false" />
+    <Property Name="mot_de_passe" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_utilisateur" Type="int" Nullable="false" />
+    <Property Name="etat" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="date_commande" Type="nchar" MaxLength="20" />
+    <Property Name="date_livraison" Type="nchar" MaxLength="20" />
+    <Property Name="date_expedition" Type="nchar" MaxLength="20" />
+    <Property Name="id_livraison" Type="int" Nullable="false" />
+    <Property Name="fret" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="id_methode_livraison" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Coordonnees_de_livraison">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_client" Type="int" Nullable="false" />
+    <Property Name="email" Type="nchar" MaxLength="40" />
+    <Property Name="numero_telephone" Type="nchar" MaxLength="20" />
+    <Property Name="pays" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="ville" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="adresse" Type="nchar" MaxLength="250" Nullable="false" />
+    <Property Name="code_postale" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Detail_commande">
+    <Key>
+      <PropertyRef Name="id_commande" />
+      <PropertyRef Name="id_produit" />
+    </Key>
+    <Property Name="id_commande" Type="int" Nullable="false" />
+    <Property Name="id_produit" Type="int" Nullable="false" />
+    <Property Name="prix_unit" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="quantite" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Liste_souhait">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_client" Type="int" Nullable="false" />
+    <Property Name="id_produit" Type="int" Nullable="false" />
+    <Property Name="quantite" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Panier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_client" Type="int" Nullable="false" />
+    <Property Name="id_produit" Type="int" Nullable="false" />
+    <Property Name="quantite" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom_produit" Type="nchar" MaxLength="40" Nullable="false" />
+    <Property Name="id_categorie" Type="bigint" Nullable="false" />
+    <Property Name="prix" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="image" Type="nchar" MaxLength="200" />
+    <Property Name="description" Type="ntext" />
+    <Property Name="stock" Type="bigint" Nullable="false" />
+    <Property Name="quantite_lots" Type="int" Nullable="false" />
+    <Property Name="niveau_reapprovisionnement" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="EcommerceModelStoreContainer">
+    <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Coordonnees_de_livraison" EntityType="Self.Coordonnees_de_livraison" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detail_commande" EntityType="Self.Detail_commande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Liste_souhait" EntityType="Self.Liste_souhait" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Panier" EntityType="Self.Panier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
