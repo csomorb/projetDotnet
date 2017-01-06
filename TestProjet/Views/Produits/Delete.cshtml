@@ -1,0 +1,88 @@
+﻿@model TestProjet.Models.Produit
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Produit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_produit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_produit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_categorie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_categorie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantite_lots)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantite_lots)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.niveau_reapprovisionnement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.niveau_reapprovisionnement)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

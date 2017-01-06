@@ -10,6 +10,27 @@
     @Html.AntiForgeryToken()
     <h4>Créer un nouveau compte.</h4>
     <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Genre, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.RadioButtonFor(m => m.Genre, "M.", new { @checked = true }) M.
+            @Html.RadioButtonFor(m => m.Genre, "Mme") Mme
+            @Html.RadioButtonFor(m => m.Genre, "Mlle") Mlle
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nom, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Prenom, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Prenom, new { @class = "form-control" })
+        </div>
+    </div>
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })

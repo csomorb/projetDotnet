@@ -1,0 +1,93 @@
+﻿@model IEnumerable<TestProjet.Models.Produit>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<!--
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom_produit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_categorie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantite_lots)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.niveau_reapprovisionnement)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom_produit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_categorie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantite_lots)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.niveau_reapprovisionnement)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+    -->
+</table>
+
+<div class="cont-cat">
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("Details","Produits", new { id = item.id })">
+            <div class="item-cat">
+                <h3 class="text-center">@Html.DisplayFor(modelItem => item.nom_produit)</h3>
+                    <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.nom_produit)" class="img-responsive" />
+                <p>
+                    @Html.DisplayFor(modelItem => item.description)
+                </p>
+            </div>
+        </a>
+    }
+</div>
+
+
+

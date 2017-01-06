@@ -65,6 +65,21 @@ namespace TestProjet.Models
     public class RegisterViewModel
     {
         [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Nom")]
+        public string Nom { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Genre")]
+        public string Genre { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Prenom")]
+        public string Prenom { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Courrier électronique")]
         public string Email { get; set; }

@@ -18,11 +18,27 @@ namespace TestProjet.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        // pour avoir accès à la bdd
+        private EcommerceEntities _bdd = new EcommerceEntities();
+
+        class monUserManager
+        {
+            private EcommerceEntities _bdd = new EcommerceEntities();
+            public bool IsValid(string email, string password)
+            {
+                // si l'utilisateur existe dans la bdd
+                return _bdd.Client.Any(c => c.email == email
+                    && c.mot_de_passe == password);
+            }
+        }
+
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +50,9 @@ namespace TestProjet.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -73,22 +89,41 @@ namespace TestProjet.Controllers
                 return View(model);
             }
 
+            if (new monUserManager().IsValid(model.Email, model.Password))
+            {
+                var ident = new ClaimsIdentity(
+                  new[] { 
+                          // adding following 2 claim just for supporting default antiforgery provider
+                          new Claim(ClaimTypes.NameIdentifier, model.Email),
+                          new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
+                          new Claim(ClaimTypes.Name,model.Email),
+                   },
+                   DefaultAuthenticationTypes.ApplicationCookie);
+                HttpContext.GetOwinContext().Authentication.SignIn(
+                   new AuthenticationProperties { IsPersistent = false }, ident);
+                return RedirectToAction("../Home");
+            }
+
+            // invalid username or password
+            ModelState.AddModelError("", "invalid username or password");
+            return View();
+
             // Ceci ne comptabilise pas les échecs de connexion pour le verrouillage du compte
             // Pour que les échecs de mot de passe déclenchent le verrouillage du compte, utilisez shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Tentative de connexion non valide.");
-                    return View(model);
-            }
+            /*   var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+               switch (result)
+               {
+                   case SignInStatus.Success:
+                       return RedirectToLocal(returnUrl);
+                   case SignInStatus.LockedOut:
+                       return View("Lockout");
+                   case SignInStatus.RequiresVerification:
+                       return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                   case SignInStatus.Failure:
+                   default:
+                       ModelState.AddModelError("", "Tentative de connexion non valide.");
+                       return View(model);
+               }*/
         }
 
         //
@@ -120,7 +155,7 @@ namespace TestProjet.Controllers
             // Si un utilisateur entre des codes incorrects pendant un certain intervalle, le compte de cet utilisateur 
             // est alors verrouillé pendant une durée spécifiée. 
             // Vous pouvez configurer les paramètres de verrouillage du compte dans IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -142,6 +177,33 @@ namespace TestProjet.Controllers
             return View();
         }
 
+        public bool modelIsValid(RegisterViewModel model)
+        {
+            foreach (Client c in _bdd.Client)
+            {
+                if (c.email == model.Email)
+                {
+                    return false;
+                }
+            }
+            if (model.Password == null || model.Prenom == null || model.Nom == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Client nouveauClient(RegisterViewModel model)
+        {
+            Client c = new Client();
+            c.email = model.Email;
+            c.nom = model.Nom;
+            c.prenom = model.Prenom;
+            c.mot_de_passe = model.Password;
+            c.genre = model.Genre;
+            return c;
+        }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -149,24 +211,38 @@ namespace TestProjet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (modelIsValid(model))
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                Client nveauClient = nouveauClient(model);
+                _bdd.Client.Add(nveauClient);
+                if (_bdd.SaveChanges() == 1)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // Pour plus d'informations sur l'activation de la confirmation du compte et la réinitialisation du mot de passe, consultez http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Envoyer un message électronique avec ce lien
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    LoginViewModel lvm = new LoginViewModel();
+                    lvm.Email = model.Email;
+                    lvm.Password = model.Password;
+                    Login(lvm, "Home/index");
+                    return Redirect("../Home/index");
                 }
-                AddErrors(result);
             }
+
+            /*   if (ModelState.IsValid)
+               {
+                   var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                   var result = await UserManager.CreateAsync(user, model.Password);
+                   if (result.Succeeded)
+                   {
+                       await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                       // Pour plus d'informations sur l'activation de la confirmation du compte et la réinitialisation du mot de passe, consultez http://go.microsoft.com/fwlink/?LinkID=320771
+                       // Envoyer un message électronique avec ce lien
+                       // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                       // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                       // await UserManager.SendEmailAsync(user.Id, "Confirmez votre compte", "Confirmez votre compte en cliquant <a href=\"" + callbackUrl + "\">ici</a>");
+
+                       return RedirectToAction("Index", "Home");
+                   }
+                   AddErrors(result);
+               }*/
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);

@@ -1,0 +1,87 @@
+﻿@model TestProjet.Models.Produit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produit</h4>
+    <hr />
+    <div id="image_produits_detail">
+        <img src="@Html.DisplayFor(model => model.image)" alt="@Html.DisplayFor(model => model.nom_produit)" class="img-responsive" />
+    </div>
+   
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_produit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_produit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_categorie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_categorie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantite_lots)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantite_lots)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.niveau_reapprovisionnement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.niveau_reapprovisionnement)
+        </dd>
+
+    </dl>
+</div>
+<p>
+<!--    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |-->
+    @Html.ActionLink("Back to List", "Index")
+</p>

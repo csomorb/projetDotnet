@@ -16,6 +16,10 @@
     white-space: normal;
 }
 
+.dl-horizontal{
+    float : left;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -42,4 +46,15 @@ textarea {
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=135, Strength=5);
     border: solid 1px #cfcfcf;
     padding: 5px;
+}
+#description_produit{
+    max-height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#image_produits_detail{
+    height: 200px;
+    width: 200px;
+    float: left;
 }
