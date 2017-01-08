@@ -1,0 +1,70 @@
+﻿@model TestProjet.Models.Coordonnees_de_livraison
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Etes vous sure de supprimer ces cordonnées de livraison? </h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numero_telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numero_telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ville)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ville)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adresse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.code_postale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.code_postale)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Afficher toutes mes cordonnées de livraison", "Index")
+        </div>
+    }
+</div>

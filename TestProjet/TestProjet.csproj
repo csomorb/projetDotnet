@@ -199,8 +199,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategorieController.cs" />
+    <Compile Include="Controllers\Coordonnees_de_livraisonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MonCompteController.cs" />
     <Compile Include="Controllers\ProduitsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -335,6 +337,13 @@
     <Content Include="Views\Produits\Details.cshtml" />
     <Content Include="Views\Produits\Edit.cshtml" />
     <Content Include="Views\Produits\Index.cshtml" />
+    <Content Include="Views\MonCompte\Index.cshtml" />
+    <Content Include="Views\MonCompte\Changepass.cshtml" />
+    <Content Include="Views\Coordonnees_de_livraison\Create.cshtml" />
+    <Content Include="Views\Coordonnees_de_livraison\Delete.cshtml" />
+    <Content Include="Views\Coordonnees_de_livraison\Details.cshtml" />
+    <Content Include="Views\Coordonnees_de_livraison\Edit.cshtml" />
+    <Content Include="Views\Coordonnees_de_livraison\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

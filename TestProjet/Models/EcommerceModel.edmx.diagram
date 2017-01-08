@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="EcommerceModel.Categorie" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommerceModel.Client" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommerceModel.Commande" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcommerceModel.Coordonnees_de_livraison" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcommerceModel.Coordonnees_de_livraison" Width="1.75" PointX="2.875" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommerceModel.Detail_commande" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommerceModel.Liste_souhait" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EcommerceModel.Panier" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />

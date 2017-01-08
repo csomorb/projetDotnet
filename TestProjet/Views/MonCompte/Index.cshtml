@@ -1,0 +1,65 @@
+﻿@using TestProjet.Models
+@model TestProjet.Models.Client
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mon compte</h2>
+<h3>Bienvenue @Model.genre @Model.nom @Model.prenom ! </h3> <br />
+
+
+Changer mon mot de passe :
+@Html.ActionLink("Changer son mot de passe", "Changepass", "Moncompte")  <br />
+
+Mes coordonnées de livraison :
+@if (@ViewBag.nbCoordLivraison == 0)
+{
+    <p>Vous n'avez pas renseigné de coordonnée de livraison. </p>
+}
+else
+{
+    <p> Vous avez renseigné @ViewBag.nbCoordLivraison coordonnées de livraisons : </p>
+    <table class="table">
+        <tr>
+            <th>
+                adresse e-mail
+            </th>
+            <th>
+                numéro de téléphone
+            </th>
+            <th>
+                adresse
+            </th>
+            <th>
+
+            </th>
+        </tr>
+                @foreach ( var item in ViewBag.listeCoord )
+                {
+        <tr> 
+            <th> 
+                @item.email
+            </th> 
+            <th>
+                @item.numero_telephone
+            </th>
+            <th>
+                @item.adresse @item.ville @item.code_postale @item.pays
+            </th>
+            <th>
+                @Html.ActionLink("Modifier", "Edit", "Coordonnees_de_livraison",new { id = @item.id }, null) |
+                @Html.ActionLink("Supprimer", "Delete", "Coordonnees_de_livraison", new { id = @item.id }, null)
+            </th>
+        </tr>
+                }
+        </table>
+                }
+                <br />
+                @Html.ActionLink("Ajouter des coordonnées de livraison", "Create", "Coordonnees_de_livraison")
+                <br />
+
+                Mes commandes :
+
+
+
+
