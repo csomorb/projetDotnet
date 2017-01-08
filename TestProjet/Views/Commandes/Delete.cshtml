@@ -1,0 +1,88 @@
+﻿@model TestProjet.Models.Commande
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Commande</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_utilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.etat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.etat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_commande)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_commande)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_livraison)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_livraison)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_expedition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_expedition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_livraison)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_livraison)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fret)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fret)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_methode_livraison)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_methode_livraison)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

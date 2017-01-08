@@ -36,6 +36,37 @@ namespace TestProjet.Controllers
             return View(co);
         }
 
+        // GET: Coordonnees_de_livraison/Use
+        public ActionResult Use()
+        {
+            Coordonnees_de_livraison co = new Coordonnees_de_livraison();
+            co.email = User.Identity.Name;
+            Client c = getClientByMail(User.Identity.Name);
+            co.id_client = c.id;
+            return View(co);
+        }
+
+        // POST: Coordonnees_de_livraison/Create
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Use([Bind(Include = "id,id_client,email,numero_telephone,pays,ville,adresse,code_postale")] Coordonnees_de_livraison coordonnees_de_livraison)
+        {
+            if (ModelState.IsValid)
+            {
+                Client c = getClientByMail(User.Identity.Name);
+                coordonnees_de_livraison.id_client = c.id;
+                db.Coordonnees_de_livraison.Add(coordonnees_de_livraison);
+                db.SaveChanges();
+                return RedirectToAction("Etape3","Commandes");
+            }
+
+            return View(coordonnees_de_livraison);
+        }
+
+
+
         // POST: Coordonnees_de_livraison/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.

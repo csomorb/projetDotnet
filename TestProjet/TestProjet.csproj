@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategorieController.cs" />
+    <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\Coordonnees_de_livraisonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -344,6 +345,15 @@
     <Content Include="Views\Coordonnees_de_livraison\Details.cshtml" />
     <Content Include="Views\Coordonnees_de_livraison\Edit.cshtml" />
     <Content Include="Views\Coordonnees_de_livraison\Index.cshtml" />
+    <Content Include="Views\Commandes\Create.cshtml" />
+    <Content Include="Views\Commandes\Delete.cshtml" />
+    <Content Include="Views\Commandes\Details.cshtml" />
+    <Content Include="Views\Commandes\Edit.cshtml" />
+    <Content Include="Views\Commandes\Index.cshtml" />
+    <Content Include="Views\Commandes\Etape1.cshtml" />
+    <Content Include="Views\Commandes\Register.cshtml" />
+    <Content Include="Views\Commandes\Etape2.cshtml" />
+    <Content Include="Views\Coordonnees_de_livraison\Use.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

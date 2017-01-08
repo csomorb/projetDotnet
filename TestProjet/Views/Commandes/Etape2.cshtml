@@ -1,0 +1,39 @@
+﻿@Model CommandesModel
+@{
+    ViewBag.Title = "Etape2";
+}
+
+<h2>Etape2</h2>
+
+
+Sélectionnez vos coordonnées de livraison parmi vos 
+
+
+Vos coordonnées de livraisons ne figurent pas dans la liste : 
+@using (Html.BeginForm()) {
+    <hr/>
+    foreach ( var item in ViewBag.listeCoord )
+    {
+        @Html.RadioButton("adr_liv", ""+ (int) @item.id) @item.adresse  @item.ville @item.code_postale @item.pays @item.email @item.numero_telephone  <br/>
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Choisir cette adresse" />
+        </div>
+    </div>
+}
+
+
+Ajouter de nouveaux cordonnées de livraison :
+@Html.ActionLink("Ajouter des coordonnées de livraison", "Use", "Coordonnees_de_livraison")
+
+
+<br/>
+-------------<br />
+Coordonnées de livraison<br />
+--------------<br />
+Mode de livraison<br />
+--------------<br />
+Payment<br />
+
+

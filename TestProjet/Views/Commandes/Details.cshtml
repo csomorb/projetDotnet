@@ -1,0 +1,82 @@
+﻿@model TestProjet.Models.Commande
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Commande</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_utilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.etat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.etat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_commande)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_commande)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_livraison)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_livraison)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_expedition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_expedition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_livraison)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_livraison)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fret)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fret)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_methode_livraison)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_methode_livraison)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

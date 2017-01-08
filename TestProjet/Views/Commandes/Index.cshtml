@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TestProjet.Models.Commande>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_utilisateur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.etat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_commande)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_livraison)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_expedition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_livraison)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fret)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_methode_livraison)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_utilisateur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.etat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_commande)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_livraison)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_expedition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_livraison)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fret)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_methode_livraison)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

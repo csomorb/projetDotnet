@@ -73,7 +73,7 @@ namespace TestProjet.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.ReturnUrl = "/Home";
             return View();
         }
 
@@ -82,7 +82,7 @@ namespace TestProjet.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -101,7 +101,8 @@ namespace TestProjet.Controllers
                    DefaultAuthenticationTypes.ApplicationCookie);
                 HttpContext.GetOwinContext().Authentication.SignIn(
                    new AuthenticationProperties { IsPersistent = false }, ident);
-                return RedirectToAction("../Home");
+               // return RedirectToAction("../Home");
+                return RedirectToLocal(returnUrl);
             }
 
             // invalid username or password
@@ -209,7 +210,7 @@ namespace TestProjet.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (modelIsValid(model))
             {
