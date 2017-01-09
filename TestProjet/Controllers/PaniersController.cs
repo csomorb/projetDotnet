@@ -37,17 +37,26 @@ namespace TestProjet.Controllers
 
         // GET: Paniers/Create
         public ActionResult Create()
-        {
+        { 
             return View();
         }
 
+ 
         // POST: Paniers/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,id_client,id_produit,quantite")] Panier panier)
+        public ActionResult Create(int prod_id, int prod_qte)
         {
+            Panier panier = new Panier();
+            //on modifie l'id_client avec celui du client enregistré
+            Client c = getClientByMail(User.Identity.Name);
+            int id_client = c.id;
+            panier.id_client = id_client;
+            panier.id_produit = prod_id;
+            panier.quantite = prod_qte;
+
             if (ModelState.IsValid)
             {
                 db.Panier.Add(panier);
@@ -113,6 +122,12 @@ namespace TestProjet.Controllers
             db.Panier.Remove(panier);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        private Client getClientByMail(string mail)
+        {
+            return db.Client.Where(c => c.email == mail).First();
         }
 
         protected override void Dispose(bool disposing)

@@ -80,20 +80,31 @@
     @foreach (var item in Model)
     {
         <div class="item-cat">
-            <a href="@Url.Action("Details","Produits", new { id = item.id })">
-                <div >
-                    <h3 class="text-center">@Html.DisplayFor(modelItem => item.nom_produit)</h3>
-                    <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.nom_produit)" class="img-responsive image_produits_detail" />
-                    <p id="description_produit">
-                        @Html.DisplayFor(modelItem => item.description)
-                    </p>
-                </div>
-            </a>
-            <a href="@Url.Action("Ajouter au panier","d", new { id = item.id })">
-                <div class="addPane addPane--buy addPane--Liste" id="addPane--Liste">
+            <div class="product--detail">
+                <a href="@Url.Action("Details","Produits", new { id = item.id })">
+                    <div>
+                        <h3 class="text-center">@Html.DisplayFor(modelItem => item.nom_produit)</h3>
+                        <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.nom_produit)" class="img-responsive image_produits_detail" />
+                        <p id="description_produit">
+                            @Html.DisplayFor(modelItem => item.description)
+                        </p>
+                        <p>
+                           Prix : @Html.DisplayFor(modelItem => item.prix) : &euro; 
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="addPane--button">
+                <div class="addPane addPane--buy addPane--Liste" id="addPane--Liste" onclick="ShowCurrentTime()">
                     Ajouter au panier<!-- <img class="icone" src="~/Content/Image/icone/panier.jpg"> -->
+                    <input type="text" class="product_id" value="@Html.DisplayFor(modelItem => item.id)" style="visibility:hidden;" />
                 </div>
-            </a>
+                <div class="product--qte">
+                    QTE : <input class="qte" value="1" />
+                </div>
+                
+            </div>
+            
         </div>
     }
 </div>
@@ -106,7 +117,26 @@
     @Html.ActionLink("Gestion", "gestion")
 </p>
 
+<script>
+    function ShowCurrentTime() {
+        var qte = $(this).val();
+        console.log("qte :" + qte);
 
+        /* $.ajax({
+             type: "POST",
+             url: "Paniers/Create",
+             data:  { id_produit : id, quantite : qte},
+             contentType: "application/json; charset=utf-8",
+             success: OnSuccess,
+             failure: function (response) {
+                 alert(response.d);
+             }
+         });
+     }
+     function OnSuccess(response) {
+         alert(response.d);
+     }*/}
+</script>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
