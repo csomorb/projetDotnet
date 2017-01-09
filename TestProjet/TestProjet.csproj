@@ -354,6 +354,8 @@
     <Content Include="Views\Commandes\Register.cshtml" />
     <Content Include="Views\Commandes\Etape2.cshtml" />
     <Content Include="Views\Coordonnees_de_livraison\Use.cshtml" />
+    <Content Include="Views\Produits\Gestion.cshtml" />
+    <Content Include="Views\Produits\Liste.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

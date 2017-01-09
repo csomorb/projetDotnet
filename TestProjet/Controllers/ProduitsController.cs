@@ -19,6 +19,29 @@ namespace TestProjet.Controllers
         {
             return View(db.Produit.ToList());
         }
+        // GET: Produits/Gestion
+        public ActionResult Gestion()
+        {
+            return View(db.Produit.ToList());
+        }
+
+        // GET: Produits/categorie/5
+        public ActionResult Liste(long? id)
+        {
+            /* if (id_categorie == null)
+             {
+                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+             }*/
+            //string expression;
+            //expression = "id_categorie = " + id_categorie;
+            //Produit produit = db.Produit.Select(expression);
+            /* if (produit == null)
+            {
+                return HttpNotFound();
+            }*/
+            //return View(db.Produit.ToList());
+            return View(db.Produit.Where(i => i.id_categorie == id));
+        }
 
         // GET: Produits/Details/5
         public ActionResult Details(long? id)

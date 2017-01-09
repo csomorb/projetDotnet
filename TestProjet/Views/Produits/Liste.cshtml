@@ -79,23 +79,36 @@
 <div class="cont-cat">
     @foreach (var item in Model)
     {
-        <a href="@Url.Action("Details","Produits", new { id = item.id })">
-            <div class="item-cat">
-                <h3 class="text-center">@Html.DisplayFor(modelItem => item.nom_produit)</h3>
-                <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.nom_produit)" class="img-responsive image_produits_detail" />
-                <p id="description_produit">
-                    @Html.DisplayFor(modelItem => item.description)
-                </p>
-
-            </div>
-        </a>
+        <div class="item-cat">
+            <a href="@Url.Action("Details","Produits", new { id = item.id })">
+                <div>
+                    <h3 class="text-center">@Html.DisplayFor(modelItem => item.nom_produit)</h3>
+                    <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.nom_produit)" class="img-responsive image_produits_detail" />
+                    <p id="description_produit">
+                        @Html.DisplayFor(modelItem => item.description)
+                    </p>
+                </div>
+            </a>
+            <a href="@Url.Action("Ajouter au panier","d", new { id = item.id })">
+                <div class="addPane addPane--buy addPane--Liste" id="addPane--Liste">
+                    Ajouter au panier<!-- <img class="icone" src="~/Content/Image/icone/panier.jpg"> -->
+                </div>
+            </a>
+        </div>
     }
 </div>
-
+<p>
+    @Html.ActionLink("Retour", "index", "Categorie")
+</p>
 
 <p>
     A supprimer!
     @Html.ActionLink("Gestion", "gestion")
 </p>
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 
