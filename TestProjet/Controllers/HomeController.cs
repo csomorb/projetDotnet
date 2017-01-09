@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestProjet.Models;
 
 namespace TestProjet.Controllers
 {
     public class HomeController : Controller
     {
+        private EcommerceEntities _db = new EcommerceEntities();
+
         public ActionResult Index()
         {
-            return View();
+            return View(_db.Categorie.ToList());
         }
 
         public ActionResult About()

@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonCompteController.cs" />
+    <Compile Include="Controllers\PaniersController.cs" />
     <Compile Include="Controllers\ProduitsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -356,6 +357,11 @@
     <Content Include="Views\Coordonnees_de_livraison\Use.cshtml" />
     <Content Include="Views\Produits\Gestion.cshtml" />
     <Content Include="Views\Produits\Liste.cshtml" />
+    <Content Include="Views\Paniers\Create.cshtml" />
+    <Content Include="Views\Paniers\Delete.cshtml" />
+    <Content Include="Views\Paniers\Details.cshtml" />
+    <Content Include="Views\Paniers\Edit.cshtml" />
+    <Content Include="Views\Paniers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

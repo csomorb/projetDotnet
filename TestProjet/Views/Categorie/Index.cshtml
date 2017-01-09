@@ -3,7 +3,31 @@
 @{
     ViewBag.Title = "Index";
 }
-    <!--
+
+blabla
+<h2>Catégories</h2>
+
+<div class="cont-cat">
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("Liste","Produits", new { id = item.id })">
+            <div class="item-cat">
+                <h3 class="text-center">@Html.DisplayFor(modelItem => item.nom_categorie)</h3>
+                <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.nom_categorie)" class="img-responsive" />
+                <p>
+                    @Html.DisplayFor(modelItem => item.description)
+                </p>
+            </div>
+        </a>
+    }
+</div>
+
+
+ 
+
+
+
+   <!--
 <h2>Catégories</h2>
 
 <div class="cont-cat">
@@ -25,7 +49,7 @@
 -->
 
 
-<h2>Catégories</h2>
+<!--<h2>Catégories</h2>
 
 <div class="cont-cat">
     @foreach (var item in Model)
@@ -41,3 +65,4 @@
         </a>
     }
 </div>
+    -->

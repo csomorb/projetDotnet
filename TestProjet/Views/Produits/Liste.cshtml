@@ -81,7 +81,7 @@
     {
         <div class="item-cat">
             <a href="@Url.Action("Details","Produits", new { id = item.id })">
-                <div>
+                <div >
                     <h3 class="text-center">@Html.DisplayFor(modelItem => item.nom_produit)</h3>
                     <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.nom_produit)" class="img-responsive image_produits_detail" />
                     <p id="description_produit">
@@ -98,7 +98,7 @@
     }
 </div>
 <p>
-    @Html.ActionLink("Retour", "index", "Categorie")
+    @Html.ActionLink("Retour", "index", "Home")
 </p>
 
 <p>

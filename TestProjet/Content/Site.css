@@ -48,15 +48,15 @@ textarea {
     padding: 5px;
 }
 #description_produit{
-    max-height: 1em;
+    max-height: 10em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-#image_produits_detail{
-    height: 200px;
-    width: 200px;
-    float: left;
+.image_produits_detail{
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
 }
 .addPane--buy{
     /*background-color: #f5b027;*/
