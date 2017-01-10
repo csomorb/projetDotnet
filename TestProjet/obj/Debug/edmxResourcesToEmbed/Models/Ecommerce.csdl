@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_categorie" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="image" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="prenom" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="genre" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="mot_de_passe" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_utilisateur" Type="Int32" Nullable="false" />
+    <Property Name="etat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="date_commande" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="date_livraison" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="date_expedition" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="id_livraison" Type="Int32" Nullable="false" />
+    <Property Name="fret" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="id_methode_livraison" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Coordonnees_de_livraison">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_client" Type="Int32" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+    <Property Name="numero_telephone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="pays" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ville" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="adresse" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="code_postale" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Detail_commande">
+    <Key>
+      <PropertyRef Name="id_commande" />
+      <PropertyRef Name="id_produit" />
+    </Key>
+    <Property Name="id_commande" Type="Int32" Nullable="false" />
+    <Property Name="id_produit" Type="Int32" Nullable="false" />
+    <Property Name="prix_unit" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="quantite" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Liste_souhait">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_client" Type="Int32" Nullable="false" />
+    <Property Name="id_produit" Type="Int32" Nullable="false" />
+    <Property Name="quantite" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Methode_de_livraison">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="70" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="prix" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Panier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_client" Type="Int32" Nullable="false" />
+    <Property Name="id_produit" Type="Int32" Nullable="false" />
+    <Property Name="quantite" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_produit" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="id_categorie" Type="Int64" Nullable="false" />
+    <Property Name="prix" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="image" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="stock" Type="Int64" Nullable="false" />
+    <Property Name="quantite_lots" Type="Int32" Nullable="false" />
+    <Property Name="niveau_reapprovisionnement" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="EcommerceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categorie" EntityType="Self.Categorie" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Commande" EntityType="Self.Commande" />
+    <EntitySet Name="Coordonnees_de_livraison" EntityType="Self.Coordonnees_de_livraison" />
+    <EntitySet Name="Detail_commande" EntityType="Self.Detail_commande" />
+    <EntitySet Name="Liste_souhait" EntityType="Self.Liste_souhait" />
+    <EntitySet Name="Methode_de_livraison" EntityType="Self.Methode_de_livraison" />
+    <EntitySet Name="Panier" EntityType="Self.Panier" />
+    <EntitySet Name="Produit" EntityType="Self.Produit" />
+  </EntityContainer>
+</Schema>
