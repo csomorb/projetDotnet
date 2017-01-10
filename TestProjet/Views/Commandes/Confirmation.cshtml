@@ -1,0 +1,103 @@
+﻿@model TestProjet.Models.Commande
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<h2>Confirmation de votre commande</h2>
+<div class="row">
+    <div class="col-md-7">
+        <img src="~/Content/Image/Commande/etape5.png" class="img-responsive" />
+    </div>
+    <div class="col-md-5">
+        Pour la livraison vous avez choisi notre partenaire : 
+        @switch ((int)Model.id_methode_livraison)
+        {
+            case 1:
+                <img src="~/Content/Image/Commande/poste.png" class="logo_liv" />
+                <text>Vous devriez être livré le: </text> @DateTime.Now.AddDays(10).ToShortDateString()
+                break;
+            case 2:
+                <img src="~/Content/Image/Commande/chrono.png" class="logo_liv" />
+                <text>Vous devriez être livré le: </text>  @DateTime.Now.AddDays(5).ToShortDateString()
+                break;
+            case 3:
+                <img src="~/Content/Image/Commande/mondial.png" class="logo_liv" />
+                <text>Vous devriez être livré le: </text>  @DateTime.Now.AddDays(2).ToShortDateString()
+                break;
+            default:
+                <img src="~/Content/Image/Commande/ups.jpg" class="logo_liv" />
+                <text>Vous devriez être livré le: </text>  @DateTime.Now.AddDays(10).ToShortDateString()
+                break;
+        }
+    </div>
+</div>
+
+<hr/>
+
+Nous avons bien reçu votre commande @ViewBag.client.genre  @ViewBag.client.prenom  @ViewBag.client.nom .<br />
+Nos équipes se chargent de vous expédier vos produits, vous pouvez suivre l'état de votre commande en vous conectant à votre compte.<br/> 
+
+<hr/>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Coordonnées de livraison</h3>
+        <h4>Adresse : </h4>
+        @ViewBag.adresse.adresse <br/>
+        @ViewBag.adresse.ville <br/>
+        @ViewBag.adresse.code_postale <br/> 
+        @ViewBag.adresse.pays <br/> 
+        <h4>E-mail : </h4>
+        @ViewBag.adresse.email <br/>
+        <h4>Numéro de téléphone : </h4> 
+        @ViewBag.adresse.numero_telephone <br/>
+    </div>
+    <div class="col-md-6">
+        <h3>Récapitulatif de votre commande </h3>
+        <h4>Commande effectuée le : </h4> @DateTime.Now.ToLongDateString() <br />
+        <h4>Montant : </h4> @Model.fret € <br/>
+        Dont 
+        @switch ((int)Model.id_methode_livraison)
+        {
+            case 1:
+                <text> 5,5 €</text>
+                break;
+            case 2:
+                <text> 10 € </text>
+                break;
+            case 3:
+                <text> 8 €</text>
+                break;
+            default:
+                <text> 7 €</text>
+                break;
+        }
+        de frais de livraison 
+        <h4>Date de livraison prévue : </h4>
+        @switch ((int)Model.id_methode_livraison)
+        {
+            case 1:
+                @DateTime.Now.AddDays(10).ToShortDateString()
+                break;
+            case 2:
+                @DateTime.Now.AddDays(5).ToShortDateString()
+                break;
+            case 3:
+                @DateTime.Now.AddDays(2).ToShortDateString()
+                break;
+            default:
+                @DateTime.Now.AddDays(10).ToShortDateString()
+                break;
+        }
+
+    </div>
+</div>
+
+<hr/>
+<h3>Détail de votre commande </h3>
+
+<br/><br /><br />
+@Html.ActionLink("Retour à la boutique","Index","Home", null, new { @class = "bouton", @style = "color:white" }) 
+@Html.ActionLink("Mon compte","Index","Moncompte",null, new { @class = "bouton", @style = "color:white" })
+
+
+

@@ -31,6 +31,7 @@ namespace TestProjet.Models
         public virtual DbSet<Coordonnees_de_livraison> Coordonnees_de_livraison { get; set; }
         public virtual DbSet<Detail_commande> Detail_commande { get; set; }
         public virtual DbSet<Liste_souhait> Liste_souhait { get; set; }
+        public virtual DbSet<Methode_de_livraison> Methode_de_livraison { get; set; }
         public virtual DbSet<Panier> Panier { get; set; }
         public virtual DbSet<Produit> Produit { get; set; }
     }

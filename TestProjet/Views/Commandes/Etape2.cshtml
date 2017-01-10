@@ -1,39 +1,35 @@
-﻿@Model CommandesModel
+﻿@model TestProjet.Models.Commande
 @{
     ViewBag.Title = "Etape2";
 }
 
-<h2>Etape2</h2>
+<h2>Choisisez votre adresse de livraison</h2>
+<div class="row">
+    <div class="col-md-7">
+        <img src="~/Content/Image/Commande/etape2.png" class="img-responsive" />
+    </div>
+    <div class="col-md-5">
+        Résumé du panier à faire.
+    </div>
+</div>
 
-
-Sélectionnez vos coordonnées de livraison parmi vos 
-
-
-Vos coordonnées de livraisons ne figurent pas dans la liste : 
+Sélectionnez vos coordonnées de livraison parmi vos coordonnées de livraisons figurent dans la liste : 
 @using (Html.BeginForm()) {
     <hr/>
     foreach ( var item in ViewBag.listeCoord )
     {
-        @Html.RadioButton("adr_liv", ""+ (int) @item.id) @item.adresse  @item.ville @item.code_postale @item.pays @item.email @item.numero_telephone  <br/>
+        @Html.RadioButtonFor(m => m.id_livraison, ""+ (int) @item.id)  @item.adresse  @item.ville  @item.code_postale  @item.pays <text> E-mail : </text>  @item.email <text> Téléphone: </text>  @item.numero_telephone  <br/>
     }
+    <br/>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Choisir cette adresse" />
+            <input type="submit" class="bouton" value="Choisir cette adresse" />
         </div>
     </div>
 }
-
-
-Ajouter de nouveaux cordonnées de livraison :
-@Html.ActionLink("Ajouter des coordonnées de livraison", "Use", "Coordonnees_de_livraison")
-
-
-<br/>
--------------<br />
-Coordonnées de livraison<br />
---------------<br />
-Mode de livraison<br />
---------------<br />
-Payment<br />
+<br/><br/>
+Votre adresse de livraison ne figure pas dans la liste ? <br/>
+Ajouter une nouvelle adresse de livraison : <br/><br/>
+@Html.ActionLink("Ajouter une adresse", "Use", "Coordonnees_de_livraison", null , new { @class = "bouton", @style = "color:white" })
 
 

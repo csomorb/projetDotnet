@@ -472,6 +472,22 @@ namespace TestProjet.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public ActionResult DeleteAccount()
+        {
+            _bdd.Client.Remove(getClientByMail(User.Identity.Name));
+            _bdd.SaveChanges();
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        private Client getClientByMail(string mail)
+        {
+            return _bdd.Client.Where(c => c.email == mail).First();
+        }
+
+
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]

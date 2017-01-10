@@ -71,6 +71,15 @@
           <Property Name="id_produit" Type="int" Nullable="false" />
           <Property Name="quantite" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Methode_de_livraison">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="nchar" MaxLength="70" Nullable="false" />
+          <Property Name="description" Type="ntext" />
+          <Property Name="prix" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="Panier">
           <Key>
             <PropertyRef Name="id" />
@@ -101,6 +110,7 @@
           <EntitySet Name="Coordonnees_de_livraison" EntityType="Self.Coordonnees_de_livraison" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detail_commande" EntityType="Self.Detail_commande" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Liste_souhait" EntityType="Self.Liste_souhait" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Methode_de_livraison" EntityType="Self.Methode_de_livraison" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Panier" EntityType="Self.Panier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -175,6 +185,15 @@
           <Property Name="id_produit" Type="Int32" Nullable="false" />
           <Property Name="quantite" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Methode_de_livraison">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="70" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="prix" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
         <EntityType Name="Panier">
           <Key>
             <PropertyRef Name="id" />
@@ -205,6 +224,7 @@
           <EntitySet Name="Coordonnees_de_livraison" EntityType="Self.Coordonnees_de_livraison" />
           <EntitySet Name="Detail_commande" EntityType="Self.Detail_commande" />
           <EntitySet Name="Liste_souhait" EntityType="Self.Liste_souhait" />
+          <EntitySet Name="Methode_de_livraison" EntityType="Self.Methode_de_livraison" />
           <EntitySet Name="Panier" EntityType="Self.Panier" />
           <EntitySet Name="Produit" EntityType="Self.Produit" />
         </EntityContainer>
@@ -282,6 +302,16 @@
                 <ScalarProperty Name="id_client" ColumnName="id_client" />
                 <ScalarProperty Name="id_produit" ColumnName="id_produit" />
                 <ScalarProperty Name="quantite" ColumnName="quantite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Methode_de_livraison">
+            <EntityTypeMapping TypeName="EcommerceModel.Methode_de_livraison">
+              <MappingFragment StoreEntitySet="Methode_de_livraison">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

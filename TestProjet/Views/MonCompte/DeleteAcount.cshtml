@@ -1,0 +1,19 @@
+﻿@model TestProjet.Models.Client
+
+@{
+    ViewBag.Title = "DeleteAcount";
+}
+
+<h2>Supprimer son compte</h2>
+
+<h3>Etes vous sure de supprimer votre compte @Model.genre @Model.prenom @Model.nom ? </h3>
+<div>
+    @using (Html.BeginForm("DeleteAccount", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="bouton_rouge" /> |
+            @Html.ActionLink("Annuler", "Index", "Moncompte", null, new { @class = "bouton", @style = "color:white" })
+        </div>
+    }
+</div>

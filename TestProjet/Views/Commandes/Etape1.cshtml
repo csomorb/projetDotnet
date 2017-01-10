@@ -4,15 +4,25 @@
     ViewBag.Title = "Connexion";
 }
 
+
+
 <h2>Bienvenue, connectez-vous !</h2>
+<div class="row">
+    <div class="col-md-7">
+        <img src="~/Content/Image/Commande/etape1.png" class="img-responsive" />
+    </div>
+    <div class="col-md-5">
+        Résumé du panier à faire.
+    </div>
+</div>
 <p>
     Pour effectuer votre commande, vous avez besoin d'etre connecté, cela ne prend que quelques minutes et vous pourrez suivre l'état de votre commande par la suite.
 </p>
 
-<h3> Je dispose d'un compte</h3>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
+        <h3> Je dispose d'un compte</h3>
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -43,18 +53,20 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Connexion" class="btn btn-default" />
+                        <input type="submit" value="Connexion" class="bouton" />
                     </div>
                 </div>
-                <p>
-                    <h3> Je crée un compte</h3>
-                    @Html.ActionLink("S'inscrire comme nouvel utilisateur", "Register")
-                </p>
+                
             }
         </section>
     </div>
+    <div class="col-md-6">
+        <h3> Je n'ai pas encore de compte</h3>
+        <hr/>
+        @Html.ActionLink("Créer un compte", "Register" , null , new { @class = "bouton", @style = "color:white" })
+       
+    </div>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

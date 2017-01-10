@@ -4,79 +4,65 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details de la commande de @ViewBag.client.genre  @ViewBag.client.prenom  @ViewBag.client.nom </h2>
 
-<div>
-    <h4>Commande</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.id_utilisateur)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.id_utilisateur)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.etat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.etat)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.date_commande)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.date_commande)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.date_livraison)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.date_livraison)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.date_expedition)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.date_expedition)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.id_livraison)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.id_livraison)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fret)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fret)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.id_methode_livraison)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.id_methode_livraison)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Coordonnées de livraison</h3>
+        <h4>Adresse : </h4>
+        @ViewBag.adresse.adresse <br />
+        @ViewBag.adresse.ville <br />
+        @ViewBag.adresse.code_postale <br />
+        @ViewBag.adresse.pays <br />
+        <h4>E-mail : </h4>
+        @ViewBag.adresse.email <br />
+        <h4>Numéro de téléphone : </h4>
+        @ViewBag.adresse.numero_telephone <br />
+    </div>
+    <div class="col-md-6">
+        <h3>Récapitulatif de votre commande </h3>
+        <h4>Commande effectuée le : </h4>@Model.date_commande <br />
+        <h4>Montant : </h4> @Model.fret € <br />
+        Dont
+        @switch ((int)Model.id_methode_livraison)
+        {
+            case 1:
+                <text> 5,5 €</text>
+                break;
+            case 2:
+                <text> 10 € </text>
+                break;
+            case 3:
+                <text> 8 €</text>
+                break;
+            default:
+                <text> 7 €</text>
+                break;
+        }
+        de frais de livraison
+        <h4>Mode de livraison : </h4>
+        @switch ((int)Model.id_methode_livraison)
+        {
+            case 1:
+                <img src="~/Content/Image/Commande/poste.png" class="logo_liv" />
+                break;
+            case 2:
+                <img src="~/Content/Image/Commande/chrono.png" class="logo_liv" />
+                break;
+            case 3:
+                <img src="~/Content/Image/Commande/mondial.png" class="logo_liv" />
+                break;
+            default:
+                <img src="~/Content/Image/Commande/ups.jpg" class="logo_liv" />
+                break;
+        }
+        <h4>Etat de la commande :</h4>
+           @Model.etat
+    </div>
 </div>
+
+<h3>Produits achetés</h3>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à mon compte", "Index", "Moncompte",null, new { @class = "bouton", @style = "color:white" })
 </p>

@@ -21,6 +21,8 @@ namespace TestProjet.Controllers
             Client c = getClientByMail(User.Identity.Name);
             ViewBag.nbCoordLivraison = _bdd.Coordonnees_de_livraison.Count(co => co.id_client == c.id);
             ViewBag.listeCoord = _bdd.Coordonnees_de_livraison.Where(co => co.id_client == c.id);
+            ViewBag.nbCommande = _bdd.Commande.Count(cm => cm.id_utilisateur == c.id);
+            ViewBag.listeCommande = _bdd.Commande.Where(cm => cm.id_utilisateur == c.id).OrderBy(cm => cm.date_commande);
             return View(c);
         }
 
@@ -29,6 +31,12 @@ namespace TestProjet.Controllers
         public ActionResult Changepass()
         {
             return View();
+        }
+
+        public ActionResult DeleteAcount()
+        {
+            Client c = getClientByMail(User.Identity.Name);
+            return View(c);
         }
 
         // POST: Changee de mot de pass

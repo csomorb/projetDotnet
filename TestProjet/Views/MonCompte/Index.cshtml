@@ -4,14 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Mon compte</h2>
-<h3>Bienvenue @Model.genre @Model.nom @Model.prenom ! </h3> <br />
+<h2>Bienvenue @Model.genre @Model.nom @Model.prenom ! </h2>
+<h3> Mon Compte </h3>
+<br />
+@Html.ActionLink("Changer mon mot de passe", "Changepass", "Moncompte", null, new { @class = "bouton", @style = "color:white" })
 
-
-Changer mon mot de passe :
-@Html.ActionLink("Changer son mot de passe", "Changepass", "Moncompte")  <br />
-
-Mes coordonnées de livraison :
+@Html.ActionLink("Supprimer mon compte", "DeleteAcount", "Moncompte", null, new { @class = "bouton", @style = "color:white" })  <br />
+<br />
+<h3>Mes coordonnées de livraison </h3>
 @if (@ViewBag.nbCoordLivraison == 0)
 {
     <p>Vous n'avez pas renseigné de coordonnée de livraison. </p>
@@ -34,32 +34,71 @@ else
 
             </th>
         </tr>
-                @foreach ( var item in ViewBag.listeCoord )
-                {
-        <tr> 
-            <th> 
-                @item.email
-            </th> 
+        @foreach (var item in ViewBag.listeCoord)
+        {
+            <tr>
+                <td>
+                    @item.email
+                </td>
+                <td>
+                    @item.numero_telephone
+                </td>
+                <td>
+                    @item.adresse @item.ville @item.code_postale @item.pays
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Edit", "Coordonnees_de_livraison", new { id = @item.id }, null) |
+                    @Html.ActionLink("Supprimer", "Delete", "Coordonnees_de_livraison", new { id = @item.id }, null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+<br />
+@Html.ActionLink("Ajouter des coordonnées de livraison", "Create", "Coordonnees_de_livraison", null, new { @class = "bouton", @style = "color:white" })
+<br /><br />
+
+<h3> Mes commandes </h3>
+
+@if (ViewBag.nbCommande == 0)
+{
+    <p>Vous n'avez effectué aucune réservation pour le moment. </p>
+}
+else
+{
+    <table class="table">
+
+        <tr>
             <th>
-                @item.numero_telephone
+                Date de la commande : 
             </th>
             <th>
-                @item.adresse @item.ville @item.code_postale @item.pays
+                Monatnt de la commande :
             </th>
             <th>
-                @Html.ActionLink("Modifier", "Edit", "Coordonnees_de_livraison",new { id = @item.id }, null) |
-                @Html.ActionLink("Supprimer", "Delete", "Coordonnees_de_livraison", new { id = @item.id }, null)
+                Etat de la  commande : 
+            </th>
+            <th>
+
             </th>
         </tr>
-                }
-        </table>
-                }
-                <br />
-                @Html.ActionLink("Ajouter des coordonnées de livraison", "Create", "Coordonnees_de_livraison")
-                <br />
-
-                Mes commandes :
-
-
+        @foreach (var item in ViewBag.listeCommande) {
+        <tr>
+            <td>
+                @item.date_commande
+            </td>
+            <td>
+                @item.fret
+            </td>
+            <td>
+                @item.etat
+            </td>
+            <td>
+                @Html.ActionLink("Détails", "Details", "Commandes", new { id = (int)@item.id } , null )
+            </td>
+        </tr>
+        }
+    </table>
+}
 
 

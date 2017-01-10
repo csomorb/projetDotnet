@@ -59,7 +59,7 @@ namespace TestProjet.Controllers
                 coordonnees_de_livraison.id_client = c.id;
                 db.Coordonnees_de_livraison.Add(coordonnees_de_livraison);
                 db.SaveChanges();
-                return RedirectToAction("Etape3","Commandes");
+                return RedirectToAction("Etape3","Commandes", new { id_livraison = coordonnees_de_livraison.id });
             }
 
             return View(coordonnees_de_livraison);

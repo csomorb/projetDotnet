@@ -11,16 +11,26 @@ namespace TestProjet.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Coordonnees_de_livraison
     {
         public int id { get; set; }
         public int id_client { get; set; }
+        [Required]
+        [EmailAddress]
+        [Display(Name = "adresse e-amil")]
         public string email { get; set; }
+        [Phone]
+        [Display(Name = "téléphone")]
         public string numero_telephone { get; set; }
+        [Required]
         public string pays { get; set; }
+        [Required]
         public string ville { get; set; }
+        [Required]
         public string adresse { get; set; }
+        [Display(Name = "code postale")]
         public int code_postale { get; set; }
     }
 }

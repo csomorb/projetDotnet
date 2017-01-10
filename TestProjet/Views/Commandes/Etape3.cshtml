@@ -1,0 +1,62 @@
+﻿@model TestProjet.Models.Commande
+@{
+    ViewBag.Title = "Etape3";
+}
+
+<h2>Sélectionnez votre mode de livraison </h2>
+<div class="row">
+    <div class="col-md-7">
+        <img src="~/Content/Image/Commande/etape3.png" class="img-responsive" />
+    </div>
+    <div class="col-md-5">
+        Résumé du panier à faire.
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @:<div class="liv_container">
+    foreach (var item in ViewBag.mode_livraison)
+    {
+        @:<div class="box_liv">
+            @:<div class="img_liv">
+    @Html.RadioButtonFor(m => m.id_methode_livraison, "" + (int)@item.id)
+
+        switch ((int)@item.id)
+        {
+            case 1:
+                <img src="~/Content/Image/Commande/poste.png" class="logo_liv" />
+                break;
+            case 2:
+                <img src="~/Content/Image/Commande/chrono.png" class="logo_liv" />
+                break;
+            case 3:
+                <img src="~/Content/Image/Commande/mondial.png" class="logo_liv" />
+                break;
+            default:
+                <img src="~/Content/Image/Commande/ups.jpg" class="logo_liv" />
+                break;
+        }
+            @:</div>
+            @:<div class="liv_t">
+                @item.nom <br />
+                @item.description <br />
+                @item.prix  <br />
+          @:</div>
+      @:</div>
+
+    }
+    @:</div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="bouton" value="Choisir le mode de livraison" />
+            </div>
+        </div>
+
+
+}
+
+
+
+
