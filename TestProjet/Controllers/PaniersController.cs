@@ -2,23 +2,72 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using TestProjet.Models;
+using System.Collections;
+
 
 namespace TestProjet.Controllers
+
 {
+
+    
+
     public class PaniersController : Controller
     {
         private EcommerceEntities db = new EcommerceEntities();
 
+
+
         // GET: Paniers
         public ActionResult Index()
         {
-            foreach (int element in db.Panier.ToList())
-                return View(db.Panier.ToList() ) + View(db.Produit.ToList();
+         //   Produit prod = new Produit();
+         //   ViewBag.monPanier = db.Panier.ToList();
+         //   ViewBag.monProduit = db.Produit.ToList();
+            //   ViewBag.monProduit2 = db.Produit.All();
+            Client c = getClientByMail(User.Identity.Name);
+       /*     ViewBag.contenuDuPanier = db.Panier.Where(p => p.id_client == c.id).Join(db.Produit, panier => panier.id_produit, produit => produit.id , (panier, produit ) => new {
+                             produitID  = produit.id ,
+                             poduitNom = produit.nom_produit ,
+                             panierID = panier.id } ).ToList();*/
+            var bbb = db.Panier.Where(p => p.id_client == c.id).Join(db.Produit, panier => panier.id_produit, produit => produit.id, (panier, produit) => new {
+                produitID = produit.id,
+                poduitNom = produit.nom_produit,
+                panierID = panier.id
+            });
+
+            
+            ArrayList resultat = new ArrayList();
+
+            foreach (var item in bbb)
+            {
+                resultat.Add(item.panierID);
+                resultat.Add(item.poduitNom);
+                resultat.Add(item.produitID);
+
+            }
+
+
+            /*   Array tab
+               foreach (var item in bbb)
+
+
+                   expando.Add( item.panierID.ToString(), item);*/
+
+
+
+            ViewBag.contenuDuPanier = resultat;
+
+            /*var a = (from p in db.Produit join pa in db.Panier on p.id equals pa.id_produit where pa.id_client == c.id
+                     select p
+                );*/
+            return View(db.Panier.ToList());
         }
 
         // GET: Paniers/Details/5
@@ -124,8 +173,6 @@ namespace TestProjet.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
         private Client getClientByMail(string mail)
         {
             return db.Client.Where(c => c.email == mail).First();

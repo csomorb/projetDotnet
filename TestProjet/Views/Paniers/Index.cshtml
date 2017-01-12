@@ -2,6 +2,12 @@
 
 @{
     ViewBag.Title = "Index";
+
+   /* @using WebMatrix.Data;
+    var db= Database.Open("EcommerceEntities");
+    //var selectQueryString = "SELECT * FROM Product ORDER BY Name";
+    */
+
 }
 
 <!--<h2>Index</h2>
@@ -63,30 +69,29 @@
             option
         </th>
     </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                image
-            </td>
-            <td>
-                @Html.ActionLink("name", "Details", new { id = item.id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quantite)
-            </td>
-            <td>
-                prix
-            </td>
-            <td>
-                @using (Html.BeginForm())
+
+
+
+
+        @foreach (var item in ViewBag.contenuDuPanier)
+        {
+            <tr>
+                <td>
+                    image
+                </td>
+                <td>
+                    @item
+
+                </td>
+                <td>
+                    @using (Html.BeginForm())
                 {
-                    @Html.AntiForgeryToken()
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Delete" class="btn btn-default" />
-                    </div>
-                }
-            </td>
-        </tr>
-    }
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Delete" class="btn btn-default" />
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
 </table>
