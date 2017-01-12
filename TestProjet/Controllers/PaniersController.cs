@@ -15,13 +15,9 @@ using System.Collections;
 namespace TestProjet.Controllers
 
 {
-
-    
-
     public class PaniersController : Controller
     {
         private EcommerceEntities db = new EcommerceEntities();
-
 
 
         // GET: Paniers
@@ -39,29 +35,33 @@ namespace TestProjet.Controllers
             var bbb = db.Panier.Where(p => p.id_client == c.id).Join(db.Produit, panier => panier.id_produit, produit => produit.id, (panier, produit) => new {
                 produitID = produit.id,
                 poduitNom = produit.nom_produit,
+                produitImage = produit.image,
+                produitPrix = produit.prix,
+                panierQTE = panier.quantite,
                 panierID = panier.id
             });
 
+            int prixTotal = 0;
             
             ArrayList resultat = new ArrayList();
-
             foreach (var item in bbb)
             {
-                resultat.Add(item.panierID);
-                resultat.Add(item.poduitNom);
-                resultat.Add(item.produitID);
-
+                ArrayList monItem = new ArrayList();
+                monItem.Add(item.panierID);
+                monItem.Add(item.poduitNom);
+                monItem.Add(item.produitID);
+                monItem.Add(item.produitImage);
+                monItem.Add(item.produitPrix);
+                monItem.Add(item.panierQTE);
+                resultat.Add(monItem);
+                prixTotal = prixTotal + int.Parse(item.produitPrix);
             }
-
 
             /*   Array tab
                foreach (var item in bbb)
 
-
                    expando.Add( item.panierID.ToString(), item);*/
-
-
-
+            ViewBag.prixPanier = prixTotal;
             ViewBag.contenuDuPanier = resultat;
 
             /*var a = (from p in db.Produit join pa in db.Panier on p.id equals pa.id_produit where pa.id_client == c.id
@@ -91,7 +91,6 @@ namespace TestProjet.Controllers
             return View();
         }
 
- 
         // POST: Paniers/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.

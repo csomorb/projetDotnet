@@ -49,49 +49,47 @@
 }
 
 </table>-->
-
-
+<h2>Mon panier</h2>
+<br/><br/>
 <table>
-    <tr>
-        <th>
-            image
-        </th>
-        <th>
-            nom
-        </th>
-        <th>
-            qte
-        </th>
-        <th>
-            prix
-        </th>
-        <th>
-            option
-        </th>
-    </tr>
-
-
-
-
         @foreach (var item in ViewBag.contenuDuPanier)
         {
             <tr>
-                <td>
-                    image
+                <td id="panier_image_@item[0]" class="panier_image">
+                    <img class="my_panier_image"src="@item[3]" />
                 </td>
-                <td>
-                    @item
-
+                <td id="panier_nomProduit_@item[0]" class="panier_nomProduit">
+                    <a href="@Url.Action("Details","Produits", new { id = @item[0] })">@item[1]</a>
                 </td>
-                <td>
-                    @using (Html.BeginForm())
-                {
-                        @Html.AntiForgeryToken()
-                        <div class="form-actions no-color">
-                            <input type="submit" value="Delete" class="btn btn-default" />
-                        </div>
-                    }
+                <td id="panier_qteProduit_@item[0]"class="panier_qteProduit ">
+                    @item[5]
+                </td>
+                <td id="panier_prixProduit_@item[0]" class="panier_prixProduit ">
+                    @item[4]
+                </td>
+                <td id="panier_option_@item[0]" class="panier_option ">
+                    <div class="addPane addPane--buy addPane--Liste" id="addPane--Liste" onclick="deleteThisArticleOnPanier()">
+                        Supprimer du panier
+                    </div>
                 </td>
             </tr>
         }
 </table>
+<div class="affichage_prix_total">
+    prix total : @ViewBag.prixPanier &euro;
+</div>
+
+<script>
+
+
+
+</script>
+
+
+<!--  @using (Html.BeginForm())
+               {
+                       @Html.AntiForgeryToken()
+                       <div class="form-actions no-color">
+                           <input type="submit" value="Delete" class="btn btn-default" />
+                       </div>
+                   }-->

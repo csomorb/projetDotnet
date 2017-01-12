@@ -164,3 +164,18 @@ textarea {
     width:140px;
     height: auto;
 }
+.my_panier_image{
+    width:100px;
+}
+.panier_nomProduit{
+    width:150px;
+}
+.panier_qteProduit{
+     width:100px;
+}
+.panier_prixProduit{
+     width:100px;
+}
+.panier_option{
+    width:250px;
+}
