@@ -22,33 +22,24 @@
                     </div>
                 </a>
             </div>
-            <div>
-                @Html.ActionLink("Ajouter au panier", "AddToPanier", "Paniers", new { id_produit = item.id, quantite =   }, new { @class = "bouton", @style = "color:white" })
-
-
-            </div>
             <div class="addPane--button">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("AddPanier", "Paniers"))
                 {
-                    <input class="bouton" type="submit" value="Ajouter au panier"/>
-                    <input class="id" value="@item.id" style="visibility: hidden;" />
-                    <input class="qte" value="1" />
-                    <input class="IdPage" value="@ViewBag.idPage" style="visibility: hidden;"/>
+                    <input class="bouton" type="submit" value="ajouter"/>
+                    <input name="id_produit" class="id" value="@item.id" style="visibility: hidden;" />
+                    <input name="quantite" class="qte" value="1" />
+                    <input name="IdPage" class="IdPage" value="@ViewBag.idPage" style="visibility: hidden;"/>
                 }
 
-
-
-
-                <div class="addPane addPane--buy addPane--Liste" id="addPane--Liste" onclick="ShowCurrentTime()">
-                    Ajouter au panier<!-- <img class="icone" src="~/Content/Image/icone/panier.jpg"> -->
+                <!--<div class="addPane addPane--buy addPane--Liste" id="addPane--Liste" onclick="ShowCurrentTime()">
+                    Ajouter au panier<!-- <img class="icone" src="~/Content/Image/icone/panier.jpg">
                     <input type="text" class="product_id"  style="visibility:hidden;" value="@Html.DisplayFor(modelItem => item.id)"/>
                 </div>
                 
-                    QTE : <input class="qte" value="1" />
+                    QTE : <input class="qte" value="1" />-->
             
                 
             </div>
-            
         </div>
     }
 </div>

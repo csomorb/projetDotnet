@@ -70,6 +70,24 @@ namespace TestProjet.Controllers
             return View(db.Panier.ToList());
         }
 
+        //Ajout d'un panier
+        public ActionResult AddPanier(int id_produit, int quantite, int IdPage)
+        {
+            //
+            Client c = getClientByMail(User.Identity.Name);
+            Panier myNewPane = new Panier();
+            myNewPane.id_client = c.id;
+            myNewPane.id_produit = id_produit;
+            myNewPane.quantite = quantite;
+
+            db.Panier.Add(myNewPane);
+            db.SaveChanges();
+            
+            //int IdPage = 1;*/
+            //return View(db.Produit.Where(i => i.id_categorie == IdPage));
+            return RedirectToAction("Liste", "Produits", IdPage);
+        }
+
         // GET: Paniers/Details/5
         public ActionResult Details(int? id)
         {
@@ -96,16 +114,8 @@ namespace TestProjet.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int prod_id, int prod_qte)
+        public ActionResult Create([Bind(Include = "id,id_client,id_produit,quantite")] Panier panier)
         {
-            Panier panier = new Panier();
-            //on modifie l'id_client avec celui du client enregistré
-            Client c = getClientByMail(User.Identity.Name);
-            int id_client = c.id;
-            panier.id_client = id_client;
-            panier.id_produit = prod_id;
-            panier.quantite = prod_qte;
-
             if (ModelState.IsValid)
             {
                 db.Panier.Add(panier);
