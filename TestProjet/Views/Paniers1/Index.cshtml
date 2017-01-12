@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<!--<h2>Index</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -42,51 +42,4 @@
     </tr>
 }
 
-</table>-->
-
-
-<table>
-    <tr>
-        <th>
-            image
-        </th>
-        <th>
-            nom
-        </th>
-        <th>
-            qte
-        </th>
-        <th>
-            prix
-        </th>
-        <th>
-            option
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                image
-            </td>
-            <td>
-                @Html.ActionLink("name", "Details", new { id = item.id })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quantite)
-            </td>
-            <td>
-                prix
-            </td>
-            <td>
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    <div class="form-actions no-color">
-                        <input type="submit" value="Delete" class="btn btn-default" />
-                    </div>
-                }
-            </td>
-        </tr>
-    }
 </table>

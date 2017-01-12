@@ -97,11 +97,11 @@
             <div class="addPane--button">
                 <div class="addPane addPane--buy addPane--Liste" id="addPane--Liste" onclick="ShowCurrentTime()">
                     Ajouter au panier<!-- <img class="icone" src="~/Content/Image/icone/panier.jpg"> -->
-                    <input type="text" class="product_id" value="@Html.DisplayFor(modelItem => item.id)" style="visibility:hidden;" />
+                    <input type="text" class="product_id"  style="visibility:hidden;" value="@Html.DisplayFor(modelItem => item.id)"/>
                 </div>
-                <div class="product--qte">
+                
                     QTE : <input class="qte" value="1" />
-                </div>
+            
                 
             </div>
             
@@ -119,8 +119,9 @@
 
 <script>
     function ShowCurrentTime() {
-        var qte = $(this).val();
-        console.log("qte :" + qte);
+    
+        var loool = $(this).nodename();
+        console.log("qte :" + loool);
 
         /* $.ajax({
              type: "POST",
