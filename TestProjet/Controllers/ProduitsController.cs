@@ -40,6 +40,7 @@ namespace TestProjet.Controllers
                 return HttpNotFound();
             }*/
             //return View(db.Produit.ToList());
+            ViewBag.idPage = id;
             return View(db.Produit.Where(i => i.id_categorie == id));
         }
 

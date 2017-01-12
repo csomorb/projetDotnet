@@ -4,78 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-
-<!--
-
-<h2>Index</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nom_produit)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.id_categorie)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.prix)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.stock)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.quantite_lots)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.niveau_reapprovisionnement)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nom_produit)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.id_categorie)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.prix)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.stock)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantite_lots)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.niveau_reapprovisionnement)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
-
-</table>
--->
 <div class="cont-cat">
     @foreach (var item in Model)
     {
@@ -94,7 +22,23 @@
                     </div>
                 </a>
             </div>
+            <div>
+                @Html.ActionLink("Ajouter au panier", "AddToPanier", "Paniers", new { id_produit = item.id, quantite =   }, new { @class = "bouton", @style = "color:white" })
+
+
+            </div>
             <div class="addPane--button">
+                @using (Html.BeginForm())
+                {
+                    <input class="bouton" type="submit" value="Ajouter au panier"/>
+                    <input class="id" value="@item.id" style="visibility: hidden;" />
+                    <input class="qte" value="1" />
+                    <input class="IdPage" value="@ViewBag.idPage" style="visibility: hidden;"/>
+                }
+
+
+
+
                 <div class="addPane addPane--buy addPane--Liste" id="addPane--Liste" onclick="ShowCurrentTime()">
                     Ajouter au panier<!-- <img class="icone" src="~/Content/Image/icone/panier.jpg"> -->
                     <input type="text" class="product_id"  style="visibility:hidden;" value="@Html.DisplayFor(modelItem => item.id)"/>
@@ -117,27 +61,6 @@
     @Html.ActionLink("Gestion", "gestion")
 </p>
 
-<script>
-    function ShowCurrentTime() {
-    
-        var loool = $(this).nodename();
-        console.log("qte :" + loool);
-
-        /* $.ajax({
-             type: "POST",
-             url: "Paniers/Create",
-             data:  { id_produit : id, quantite : qte},
-             contentType: "application/json; charset=utf-8",
-             success: OnSuccess,
-             failure: function (response) {
-                 alert(response.d);
-             }
-         });
-     }
-     function OnSuccess(response) {
-         alert(response.d);
-     }*/}
-</script>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }

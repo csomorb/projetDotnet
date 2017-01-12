@@ -177,6 +177,17 @@ namespace TestProjet.Controllers
             return db.Client.Where(c => c.email == mail).First();
         }
 
+
+        public ActionResult DeleteFromPanier(string id_produit)
+        {
+            long id = long.Parse(id_produit);
+            db.Panier.Remove(db.Panier.Find(id));
+            db.SaveChanges();
+            return RedirectToAction("Index");
+           
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
