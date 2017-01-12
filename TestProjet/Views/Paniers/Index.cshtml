@@ -13,7 +13,18 @@
 
 <h2>Mon panier</h2>
 <br/><br/>
+<div class="affichage_prix_total">
+    Prix Total de votre panier : @ViewBag.prixPanier &euro;
+</div>
+<br/><br/>
 <table>
+    <tr>
+        <th></th>
+        <th>Nom</th>
+        <th>Quantité</th>
+        <th>Prix</th>
+        <th></th>
+    </tr>
         @foreach (var item in ViewBag.contenuDuPanier)
         {
             <tr>
@@ -35,9 +46,7 @@
             </tr>
         }
 </table>
-<div class="affichage_prix_total">
-    prix total : @ViewBag.prixPanier &euro;
-</div>
+
 
 <script>
 </script>

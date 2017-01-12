@@ -161,21 +161,37 @@ textarea {
 }
 
 .img_liv{
-    width:140px;
+    width:100px;
     height: auto;
 }
 .my_panier_image{
-    width:100px;
+    width:150px;
+    text-align: center;
 }
 .panier_nomProduit{
-    width:150px;
+    width:400px;
+    text-align: center;
 }
 .panier_qteProduit{
      width:100px;
+     text-align: center;
 }
 .panier_prixProduit{
      width:100px;
+     text-align: center;
 }
 .panier_option{
     width:250px;
+    text-align: center;
+}
+.affichage_prix_total{
+    background-color:#E4EFFF;
+    border:1px solid #9FC6FF;
+    padding:5px;
+    /*arrondir les coins en haut à gauche et en bas à droite*/
+    -moz-border-radius:10px 0;
+    -webkit-border-radius:10px 0;
+    border-radius:10px 0;
+    width : 30%;
+    float:right;
 }

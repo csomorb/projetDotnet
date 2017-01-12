@@ -54,7 +54,7 @@ namespace TestProjet.Controllers
                 monItem.Add(item.produitPrix);
                 monItem.Add(item.panierQTE);
                 resultat.Add(monItem);
-                prixTotal = prixTotal + int.Parse(item.produitPrix);
+                prixTotal = prixTotal + (int.Parse(item.produitPrix) * item.panierQTE );
             }
 
             /*   Array tab
@@ -73,19 +73,20 @@ namespace TestProjet.Controllers
         //Ajout d'un panier
         public ActionResult AddPanier(int id_produit, int quantite, int IdPage)
         {
-            //
             Client c = getClientByMail(User.Identity.Name);
             Panier myNewPane = new Panier();
+            Panier panier = new Panier();
+            //panier = db.Panier.Where(i => i.id_produit == 1);
+            
+
             myNewPane.id_client = c.id;
             myNewPane.id_produit = id_produit;
             myNewPane.quantite = quantite;
 
             db.Panier.Add(myNewPane);
             db.SaveChanges();
-            
-            //int IdPage = 1;*/
-            //return View(db.Produit.Where(i => i.id_categorie == IdPage));
-            return RedirectToAction("Liste", "Produits", IdPage);
+
+            return RedirectToAction("Liste", "Produits", new { id = IdPage });
         }
 
         // GET: Paniers/Details/5
@@ -194,8 +195,6 @@ namespace TestProjet.Controllers
             db.Panier.Remove(db.Panier.Find(id));
             db.SaveChanges();
             return RedirectToAction("Index");
-           
-
         }
 
         protected override void Dispose(bool disposing)
