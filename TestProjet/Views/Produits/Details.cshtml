@@ -14,11 +14,11 @@
 <h2>Details - @Html.DisplayFor(model => model.nom_produit)</h2>
 <div class="row">
     <div id="image_produits_detail" class=".col-md-4">
-        <img src="@Html.DisplayFor(model => model.image)" alt="@Html.DisplayFor(model => model.nom_produit)" class="img-responsive" />
+        <img src="@Html.DisplayFor(model => model.image)" alt="@Html.DisplayFor(model => model.nom_produit)" class="image_detail" />
     </div>
 
 
-    <dl class="dl-horizontal .col-md-8">
+    <dl class="dl-horizontal .col-md-8 info_detail">
         <dt>
             Nom :
         </dt>
@@ -52,10 +52,19 @@
         </dd>
 
     </dl>
+    <br />
+    <br />
+    <div class="addPane--button right">
+        @using (Html.BeginForm("AddPanier", "Paniers"))
+        {
+            <input class="bouton" type="submit" value="Ajouter au panier" />
+                        <input name="quantite" class="qte" value="1" />
+                        <input name="id_produit" class="id" value="@Html.DisplayFor(model => model.id)" style="display:none;"  />
+                        <input name="IdPage" class="IdPage" value="@Html.DisplayFor(model => model.id_categorie)"  style="display:none;"/>
+        }
+    </div>
 </div>
-<div class="addPane addPane--buy">
-    @Html.ActionLink("Ajouter au panier", "addPane", new { id = Model.id })
-</div>
+
 <p>
     <!--    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |-->
     @Html.ActionLink("retour", "Liste", new { id = Model.id_categorie }, new { @class = "right" })

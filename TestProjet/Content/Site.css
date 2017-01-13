@@ -16,9 +16,6 @@
     white-space: normal;
 }
 
-.dl-horizontal{
-    float : left;
-}
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -82,14 +79,15 @@ textarea {
 }*/
 
 .addPane {
+    min-width: 140px;
+    border: none;
     background-color: #4ab2f1;
-    color: #fff;
-    font-size: 15px;
+    padding: 10px 30px;
     text-align: center;
+    font-size: 15px;
+    color: #fff;
     text-transform: uppercase;
-    width: 100%;
-    line-height:40px;
-    display:inline-block;
+    float : right;
 }
 .detail_image_carac{
     float:left;
@@ -212,4 +210,13 @@ textarea {
 }
 .right{
     float:right;
+}
+.image_detail{
+    display: block;
+    width : 450px;
+    float:left;
+}
+.info_detail{
+    float : right;
+    width:650px;
 }
