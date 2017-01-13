@@ -3,7 +3,11 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<br /><br />
+    <div class="navigationBarre"> 
+        <a class="navigationBarre" href="@Url.Action("index","Home")">Home</a> / @ViewBag.idPageName   
+    </div>
+<br/><br/>
 <div class="cont-cat">
     @foreach (var item in Model)
     {
@@ -13,44 +17,34 @@
                     <div>
                         <h3 class="text-center">@Html.DisplayFor(modelItem => item.nom_produit)</h3>
                         <img src="@Html.DisplayFor(modelItem => item.image)" alt="@Html.DisplayFor(modelItem => item.nom_produit)" class="img-responsive image_produits_detail" />
-                        <p id="description_produit">
-                            @Html.DisplayFor(modelItem => item.description)
-                        </p>
-                        <p>
-                           Prix : @Html.DisplayFor(modelItem => item.prix) : &euro; 
-                        </p>
+                        <div class="details">
+                            <div id="description_produit">
+                                @Html.DisplayFor(modelItem => item.description)
+                            </div>
+                            <div class="item-box">
+                                Prix : @Html.DisplayFor(modelItem => item.prix) : &euro;
+                            </div>
+                        </div>
                     </div>
                 </a>
-            </div>
-            <div class="addPane--button">
-                @using (Html.BeginForm("AddPanier", "Paniers"))
-                {
-                    <input class="bouton" type="submit" value="ajouter"/>
-                    <input name="id_produit" class="id" value="@item.id" style="visibility: hidden;" />
-                    <input name="quantite" class="qte" value="1" />
-                    <input name="IdPage" class="IdPage" value="@ViewBag.idPage" style="visibility: hidden;"/>
-                }
-
-                <!--<div class="addPane addPane--buy addPane--Liste" id="addPane--Liste" onclick="ShowCurrentTime()">
-                    Ajouter au panier<!-- <img class="icone" src="~/Content/Image/icone/panier.jpg">
-                    <input type="text" class="product_id"  style="visibility:hidden;" value="@Html.DisplayFor(modelItem => item.id)"/>
+                <div class="addPane--button">
+                    @using (Html.BeginForm("AddPanier", "Paniers"))
+                    {
+                        <input class="bouton" type="submit" value="Ajouter au panier" />
+                        <input name="quantite" class="qte" value="1" />
+                        <input name="id_produit" class="id" value="@item.id" style="visibility: hidden;" />
+                        <input name="IdPage" class="IdPage" value="@ViewBag.idPage" style="visibility: hidden;" />
+                    }
                 </div>
-                
-                    QTE : <input class="qte" value="1" />-->
-            
-                
             </div>
         </div>
     }
 </div>
-<p>
+<p class="right">
     @Html.ActionLink("Retour", "index", "Home")
 </p>
-
-<p>
-    A supprimer!
-    @Html.ActionLink("Gestion", "gestion")
-</p>
+<br />
+<br />
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";

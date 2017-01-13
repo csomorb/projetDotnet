@@ -40,7 +40,10 @@ namespace TestProjet.Controllers
                 return HttpNotFound();
             }*/
             //return View(db.Produit.ToList());
+            Categorie cat = new Categorie();
+            cat = db.Categorie.Find(id);
             ViewBag.idPage = id;
+            ViewBag.idPageName = cat.nom_categorie;
             return View(db.Produit.Where(i => i.id_categorie == id));
         }
 
@@ -56,6 +59,9 @@ namespace TestProjet.Controllers
             {
                 return HttpNotFound();
             }
+            Categorie cat = new Categorie();
+            cat = db.Categorie.Find(produit.id_categorie);
+            ViewBag.idPageName = cat.nom_categorie;
             return View(produit);
         }
 

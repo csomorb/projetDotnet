@@ -23,10 +23,15 @@ namespace TestProjet.Controllers
         // GET: Paniers
         public ActionResult Index()
         {
-         //   Produit prod = new Produit();
-         //   ViewBag.monPanier = db.Panier.ToList();
-         //   ViewBag.monProduit = db.Produit.ToList();
+            //   Produit prod = new Produit();
+            //   ViewBag.monPanier = db.Panier.ToList();
+            //   ViewBag.monProduit = db.Produit.ToList();
             //   ViewBag.monProduit2 = db.Produit.All();
+            if (User.Identity.Name == "")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             Client c = getClientByMail(User.Identity.Name);
        /*     ViewBag.contenuDuPanier = db.Panier.Where(p => p.id_client == c.id).Join(db.Produit, panier => panier.id_produit, produit => produit.id , (panier, produit ) => new {
                              produitID  = produit.id ,
@@ -71,9 +76,15 @@ namespace TestProjet.Controllers
         }
 
         //Ajout d'un panier
-        public ActionResult AddPanier(int id_produit, int quantite, int IdPage)
+        public ActionResult AddPanier(int quantite, int id_produit, int IdPage)
         {
+            if (User.Identity.Name == "")
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             Client c = getClientByMail(User.Identity.Name);
+
             Panier myNewPane = new Panier();
             Panier panier = new Panier();
             //panier = db.Panier.Where(i => i.id_produit == 1);
@@ -90,7 +101,7 @@ namespace TestProjet.Controllers
         }
 
         // GET: Paniers/Details/5
-        public ActionResult Details(int? id)
+     /*   public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -102,18 +113,18 @@ namespace TestProjet.Controllers
                 return HttpNotFound();
             }
             return View(panier);
-        }
+        }*/
 
         // GET: Paniers/Create
-        public ActionResult Create()
+     /*   public ActionResult Create()
         { 
             return View();
-        }
+        }*/
 
         // POST: Paniers/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+    /*    [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,id_client,id_produit,quantite")] Panier panier)
         {
@@ -125,10 +136,10 @@ namespace TestProjet.Controllers
             }
 
             return View(panier);
-        }
+        }*/
 
         // GET: Paniers/Edit/5
-        public ActionResult Edit(int? id)
+      /*  public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -140,12 +151,12 @@ namespace TestProjet.Controllers
                 return HttpNotFound();
             }
             return View(panier);
-        }
+        }*/
 
         // POST: Paniers/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+    /*    [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,id_client,id_produit,quantite")] Panier panier)
         {
@@ -156,10 +167,10 @@ namespace TestProjet.Controllers
                 return RedirectToAction("Index");
             }
             return View(panier);
-        }
+        }*/
 
         // GET: Paniers/Delete/5
-        public ActionResult Delete(int? id)
+  /*      public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -171,7 +182,7 @@ namespace TestProjet.Controllers
                 return HttpNotFound();
             }
             return View(panier);
-        }
+        }*/
 
         // POST: Paniers/Delete/5
         [HttpPost, ActionName("Delete")]

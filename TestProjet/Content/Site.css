@@ -37,7 +37,7 @@ textarea {
 
 .item-cat{
     width: 300px;
-    height: 400px;
+    height: 460px;
     margin: 10px;
     -moz-box-shadow: 3px 3px 5px 0px #cfcfcf;
     -webkit-box-shadow: 3px 3px 5px 0px #cfcfcf;
@@ -193,5 +193,23 @@ textarea {
     -webkit-border-radius:10px 0;
     border-radius:10px 0;
     width : 30%;
+    float:right;
+}
+.item-box{
+    height: 40px;
+}
+.qte{
+    color: #444;
+    font-size: 15px;
+    height: 43px;
+    padding: 0 12px;
+    text-align: center;
+    width: 45px;
+}
+.navigationBarre{
+    color: #777;
+    font: 14px Arial,Helvetica,sans-serif;
+}
+.right{
     float:right;
 }
