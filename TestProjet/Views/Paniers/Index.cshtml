@@ -2,21 +2,12 @@
 
 @{
     ViewBag.Title = "Index";
-
-   /* @using WebMatrix.Data;
-    var db= Database.Open("EcommerceEntities");
-    //var selectQueryString = "SELECT * FROM Product ORDER BY Name";
-    */
-
 }
 
 
 <h2>Mon panier</h2>
 <br/><br/>
-<div class="affichage_prix_total">
-    Prix Total de votre panier : @ViewBag.prixPanier &euro;
-</div>
-<br/><br/>
+
 <table>
     <tr>
         <th></th>
@@ -38,7 +29,7 @@
                     @item[5]
                 </td>
                 <td id="panier_prixProduit_@item[0]" class="panier_prixProduit ">
-                    @item[4]
+                    @item[4] €
                 </td>
                 <td id="panier_option_@item[0]" class="panier_option ">
                     @Html.ActionLink("Supprimer du panier", "DeleteFromPanier", "Paniers", new { id_produit = @item[0] }, new { @class = "bouton", @style = "color:white" })
@@ -46,14 +37,12 @@
             </tr>
         }
 </table>
+<br/><br />
+<div class="affichage_prix_total">
+    Prix Total de votre panier : @ViewBag.prixPanier &euro;
+</div>
+<br /><br />
 
+@Html.ActionLink("Passer la commande", "Etape1", "Commandes", null, new { @class = "bouton", @style = "color:white;float:right" })
 
-<script>
-</script>
-<!--  @using (Html.BeginForm())
-               {
-                       @Html.AntiForgeryToken()
-                       <div class="form-actions no-color">
-                           <input type="submit" value="Delete" class="btn btn-default" />
-                       </div>
-                   }-->
+<br/><br/><br/>
