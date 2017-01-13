@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,10 +18,20 @@ namespace TestProjet.Controllers
     {
         private EcommerceEntities db = new EcommerceEntities();
 
-        // GET: Commandes
-        public ActionResult Index()
+        public int prixPanier()
         {
-            return View(db.Commande.ToList());
+            Client c = getClientByMail(User.Identity.Name);
+            var listepa = db.Panier.Where(p => p.id_client == c.id).Join(db.Produit, panier => panier.id_produit, produit => produit.id, (panier, produit) => new {
+                produitPrix = produit.prix,
+                panierQTE = panier.quantite,
+            });
+            int prix = 0;
+            foreach (var pa in listepa)
+            {
+                prix = prix +  ( int.Parse(pa.produitPrix) * pa.panierQTE);
+            }
+            return prix;
+
         }
 
         public ActionResult Etape1()
@@ -29,6 +40,7 @@ namespace TestProjet.Controllers
             {
                 return RedirectToAction("Etape2");
             }
+            ViewBag.montant = prixPanier();
             ViewBag.ReturnUrl = "/Commandes/Etape2";
             return View();
 
@@ -47,6 +59,7 @@ namespace TestProjet.Controllers
             {
                 return RedirectToAction("Use", "Coordonnees_de_livraison");
             }
+            ViewBag.montant = prixPanier();
             ViewBag.listeCoord = db.Coordonnees_de_livraison.Where(co => co.id_client == c.id);
             return View();
 
@@ -66,6 +79,7 @@ namespace TestProjet.Controllers
             }
             Commande commande = new Commande();
             commande.id_livraison = (int)id_livraison;
+            ViewBag.montant = prixPanier();
             ViewBag.mode_livraison = db.Methode_de_livraison.ToList();
             return View(commande);
         }
@@ -80,12 +94,44 @@ namespace TestProjet.Controllers
 
         public ActionResult Etape4(Commande model)
         {
+            ViewBag.montant = prixPanier();
             return View("Etape4",model);
         }
 
         public ActionResult Confirmation(Commande model)
         {
             Client c = getClientByMail(User.Identity.Name);
+
+            var bbb = db.Panier.Where(p => p.id_client == c.id).Join(db.Produit, panier => panier.id_produit, produit => produit.id, (panier, produit) => new {
+                produitID = produit.id,
+                poduitNom = produit.nom_produit,
+                produitImage = produit.image,
+                produitPrix = produit.prix,
+                panierQTE = panier.quantite,
+                panierID = panier.id
+            });
+
+            int prixTotal = 0;
+
+            ArrayList resultat = new ArrayList();
+            foreach (var item in bbb)
+            {
+                ArrayList monItem = new ArrayList();
+                monItem.Add(item.panierID);
+                monItem.Add(item.poduitNom);
+                monItem.Add(item.produitID);
+                monItem.Add(item.produitImage);
+                monItem.Add(item.produitPrix);
+                monItem.Add(item.panierQTE);
+                int res_tmp = item.panierQTE * int.Parse(item.produitPrix);
+                monItem.Add(res_tmp);
+                resultat.Add(monItem);
+                prixTotal = prixTotal + int.Parse(item.produitPrix);
+            }
+           
+            ViewBag.contenuDuPanier = resultat;
+
+
             model.id_utilisateur = c.id;
             model.date_commande = DateTime.Now.ToString();
             model.date_expedition = "";
@@ -95,20 +141,25 @@ namespace TestProjet.Controllers
             double fret = 0.0;
             switch(model.id_methode_livraison)
             {
-                case 1 : fret = 5.5 ;
+                case 1 : fret = 5 ;
+                    prixTotal += 5;
                     break;
                 case 2 : fret = 10 ;
+                    prixTotal += 10;
                     break;
                 case 3: fret = 8;
+                    prixTotal += 8;
                     break;
-                default: fret = 7;
+                default:
+                    prixTotal += 7;
+                    fret = 7;
                     break; 
             } 
             db.Commande.Add(model);
             db.SaveChanges();
-            
+            ViewBag.prixPanier = prixTotal;
             // pour chaque produit du panier
-            foreach(var pan in db.Panier.Where(p => p.id_client == c.id))
+            foreach (var pan in db.Panier.Where(p => p.id_client == c.id))
             {
                 Produit pro = db.Produit.Find(pan.id_produit);
                 // diminuer la quantite en stock pour chaque produit achete
@@ -125,7 +176,7 @@ namespace TestProjet.Controllers
                 // retirer les éléments du panier
                 db.Panier.Remove(pan);
                 // sauvegarder les changements
-                db.SaveChanges();
+                //db.SaveChanges();
             }
             model.fret = fret.ToString();
             db.SaveChanges();
@@ -148,6 +199,39 @@ namespace TestProjet.Controllers
                 return HttpNotFound();
             }
             Client c = getClientByMail(User.Identity.Name);
+
+
+            var ccc = db.Detail_commande.Where(co => co.id_commande == commande.id).Join(db.Produit, detail_commande => detail_commande.id_produit, produit => produit.id,
+                (detail_commande, produit) => new
+                {
+                    produitID = produit.id,
+                    poduitNom = produit.nom_produit,
+                    produitImage = produit.image,
+                    produitPrix = produit.prix,
+                    panierQTE = detail_commande.quantite,
+                    panierID = detail_commande.id_commande
+                });
+
+            int prixTotal = 0;
+
+            ArrayList resultat = new ArrayList();
+            foreach (var item in ccc)
+            {
+                ArrayList monItem = new ArrayList();
+                monItem.Add(item.panierID);
+                monItem.Add(item.poduitNom);
+                monItem.Add(item.produitID);
+                monItem.Add(item.produitImage);
+                monItem.Add(item.produitPrix);
+                monItem.Add(item.panierQTE);
+                int res_tmp = item.panierQTE * int.Parse(item.produitPrix);
+                monItem.Add(res_tmp);
+                resultat.Add(monItem);
+                prixTotal = prixTotal + int.Parse(item.produitPrix);
+            }
+
+            ViewBag.contenuDuPanier = resultat;
+
             ViewBag.client = c;
             ViewBag.adresse = db.Coordonnees_de_livraison.Find(commande.id_livraison);
 

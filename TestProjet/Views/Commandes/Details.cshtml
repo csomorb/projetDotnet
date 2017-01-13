@@ -63,6 +63,48 @@
 
 <h3>Produits achetés</h3>
 
+<table>
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Nom du produit
+        </th>
+        <th>
+            Quantité
+        </th>
+        <th>
+            prix unitaire
+        </th>
+        <th>
+            prix
+        </th>
+    </tr>
+
+    @foreach (var item in ViewBag.contenuDuPanier)
+    {
+        <tr>
+            <td id="panier_image_@item[0]" class="panier_image">
+                <img class="my_panier_image" src="@item[3]" />
+            </td>
+            <td id="panier_nomProduit_@item[0]" class="panier_nomProduit">
+                <a href="@Url.Action("Details","Produits", new { id = @item[0] })">@item[1]</a>
+            </td>
+            <td id="panier_qteProduit_@item[0]" class="panier_qteProduit ">
+                @item[5]
+            </td>
+            <td id="panier_prixProduit_@item[0]" class="panier_prixProduit ">
+                @item[4] €
+            </td>
+            <td class="panier_prixProduit ">
+                @item[6] €
+            </td>
+        </tr>
+    }
+</table>
+
+<br/><br/>
 <p>
     @Html.ActionLink("Retour à mon compte", "Index", "Moncompte",null, new { @class = "bouton", @style = "color:white" })
 </p>

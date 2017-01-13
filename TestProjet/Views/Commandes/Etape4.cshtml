@@ -10,7 +10,7 @@
         <img src="~/Content/Image/Commande/etape4.png" class="img-responsive" />
     </div>
     <div class="col-md-5">
-        Résumé du panier à faire.
+        
     </div>
 </div>
 
@@ -21,14 +21,13 @@ Le payement n'est pas implémenté, l'image ci-dessous est ici pour donner un ex
     </div>
     <div class="col-md-5">
         <p>
-        Produits achetés: YYY € <br/>
-        A faire en fonction du panier <br/>
+        Produits achetés: @ViewBag.montant € <br/>
 
         Frais de livraison : 
         @switch ((int)Model.id_methode_livraison)
         {
             case 1:
-                <text> 5,5 €</text>
+                <text> 5 €</text>
                 break;
             case 2:
                 <text>10 € </text>
@@ -42,7 +41,27 @@ Le payement n'est pas implémenté, l'image ci-dessous est ici pour donner un ex
         }
         <br/>
         <hr/>
-        <h3>Total : XXXX € </h3>
+        <h3>Total :
+            @{ 
+                int total = ViewBag.montant;
+                switch ((int)Model.id_methode_livraison)
+                {
+                    case 1:
+                        total += 5;
+                        break;
+                    case 2:
+                        total += 10;
+                        break;
+                    case 3:
+                        total += 8;
+                        break;
+                    default:
+                        total += 7;
+                            break;
+                }
+                <text> @total </text>
+            }
+             € </h3>
         </p>
     </div>
 </div>
